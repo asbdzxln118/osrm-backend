@@ -200,7 +200,8 @@ util::Coordinate CoordinateExtractor::GetCoordinateAlongRoad(const NodeID from_n
         {
             const constexpr double ANGLE_SIMILARITY_ALLOWNESS = 5;
             if (guidance::angularDeviation(turn_angles[i - 1], turn_angles[i]) >
-                ANGLE_SIMILARITY_ALLOWNESS)
+                    FUZZY_ANGLE_DIFFERENCE ||
+                (turn_angles[i] > 180 == turn_angles[i - 1] < 180))
                 return false;
         }
         return true;
